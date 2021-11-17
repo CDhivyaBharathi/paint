@@ -17,8 +17,7 @@
 
     <a-assets>
       <a-asset-item id="shooter" src=".Assets/modals/shooter/gun.gltf"></a-asset-item>
-
-      
+      <a-asset-item id="collider" src="./Assets/modals/navmesh.gltf"></a-asset-item>
       <audio id="shoot" src="./sounds/shooter.mp3"></audio>
       <audio id="footstep" src="./sounds/footStep.mp3"></audio>
 
@@ -38,16 +37,23 @@
     <a-entity light="type: directional; color: #EEE; intensity: 1" position="-1 1 0"></a-entity>
 
     
-    <a-entity id="camera" camera position="0 1.6 0" wasd-controls="acceleration:500"
+    <a-entity id="camera-rig" movement-controls="speed: 0.2; constrainToNavMesh: true" position="0 0 5">
+      <a-entity id="camera" camera position="0 1.6 0"
       look-controls="pointerLockEnabled: false">
-      <a-entity id="weapon" gltf-model="#shooter" position="0 -2.6 -0.2" rotation="-20 -145 20" scale="0.05 0.05 0.05"
-        player-movement>
+        <a-entity id="weapon" gltf-model="#shooter" position="0.17 -2.76 -0.08" rotation="-20 -145 20" scale="0.05 0.05 0.05"
+          player-movement>
+        </a-entity>
+        <a-cursor></a-cursor>
       </a-entity>
-      <a-cursor></a-cursor>
     </a-entity>
+
 
     <!--Bullets-->
     <a-entity bullets="position:0 0 -5"></a-entity>
+
+    <!-- Navigation Mesh -->
+    <a-entity id="navigation-mesh" position="0 -1 0" gltf-model="#collider" visible="false" nav-mesh>
+    </a-entity>
 
     <!--Ground-->
     <a-plane id="ground" repeat="200 200" position="0 0 0" rotation="-90 0 0" height="200"
